@@ -13,3 +13,7 @@ package funfucts
       Terra []string
   }
 */
+
+func GetFunFacts(about string) []string {
+
+}
