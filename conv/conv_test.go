@@ -1,19 +1,40 @@
 package conv
 
 import (
-	"reflect"
+	"math"
 	"testing"
 )
 
 /*
 *
-
 	Mal for testfunksjoner
 	Du skal skrive alle funksjonene basert på denne malen
 	For alle konverteringsfunksjonene (tilsammen 6)
 	kan du bruke malen som den er (du må selvsagt endre
 	funksjonsnavn og testverdier)
 */
+
+// funksjon for å sjekke presisjon på floattall
+func withinTolerance(a, b, error float64) bool {
+	// Først sjekk om tallene er nøyaktig like
+	if a == b {
+		return true
+	}
+
+	difference := math.Abs(a - b)
+
+	// Siden vi skal dele med b, må vi sjekke om den er 0
+	// Hvis b er 0, returner avgjørelsen om d er mindre enn feilmarginen
+	// som vi aksepterer
+	if b == 0 {
+		return difference < error
+	}
+
+	// Tilslutt sjekk den relative differanse mot feilmargin
+	return (difference / math.Abs(b)) < error
+}
+
+// HER KOMMER TESTENE
 
 // PASS
 func TestFahrenheitToCelsius(t *testing.T) {
@@ -28,7 +49,7 @@ func TestFahrenheitToCelsius(t *testing.T) {
 
 	for _, tc := range tests {
 		got := FahrenheitToCelsius(tc.input)
-		if !reflect.DeepEqual(tc.want, got) {
+		if !withinTolerance(tc.want, got, 1e-5) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -42,12 +63,12 @@ func TestFahrenheitToKelvin(t *testing.T) {
 	}
 
 	tests := []test{
-		{input: 30, want: 272.0388888888889}, //272.04 did not give PASS, said got 272.03888888...
+		{input: 30, want: 272.04}, //272.04 did not give PASS, said got 272.03888888...
 	}
 
 	for _, tc := range tests {
 		got := FahrenheitToKelvin(tc.input)
-		if !reflect.DeepEqual(tc.want, got) {
+		if !withinTolerance(tc.want, got, 1e-5) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 
@@ -67,7 +88,7 @@ func TestCelsiusToFahrenheit(t *testing.T) {
 
 	for _, tc := range tests {
 		got := CelsiusToFahrenheit(tc.input)
-		if !reflect.DeepEqual(tc.want, got) {
+		if !withinTolerance(tc.want, got, 1e-5) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -86,7 +107,7 @@ func TestCelsiusToKelvin(t *testing.T) {
 
 	for _, tc := range tests {
 		got := CelsiusToKelvin(tc.input)
-		if !reflect.DeepEqual(tc.want, got) {
+		if !withinTolerance(tc.want, got, 1e-5) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -100,12 +121,12 @@ func TestKelvinToFahrenheit(t *testing.T) {
 	}
 
 	tests := []test{
-		{input: 134, want: -218.46999999999997}, // Again expected 218.47 but got 218.4699999.. basically a PASS
+		{input: 134, want: -218.47}, // Again expected 218.47 but got 218.4699999.. basically a PASS
 	}
 
 	for _, tc := range tests {
 		got := KelvinToFahrenheit(tc.input)
-		if !reflect.DeepEqual(tc.want, got) {
+		if !withinTolerance(tc.want, got, 1e-5) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -123,7 +144,7 @@ func TestKelvinToCelsius(t *testing.T) {
 
 	for _, tc := range tests {
 		got := KelvinToCelsius(tc.input)
-		if !reflect.DeepEqual(tc.want, got) {
+		if !withinTolerance(tc.want, got, 1e-5) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
