@@ -76,6 +76,8 @@ func TestFahrenheitToKelvin(t *testing.T) {
 }
 
 // Celcius til Farhenheit og Kelvin
+
+// PASS
 func TestCelsiusToFahrenheit(t *testing.T) {
 	type test struct {
 		input float64
@@ -94,6 +96,7 @@ func TestCelsiusToFahrenheit(t *testing.T) {
 	}
 }
 
+// PASS
 func TestCelsiusToKelvin(t *testing.T) {
 	type test struct {
 		input float64
@@ -114,6 +117,7 @@ func TestCelsiusToKelvin(t *testing.T) {
 }
 
 // Kelvin til Farhenheit og Celcius
+// PASS
 func TestKelvinToFahrenheit(t *testing.T) {
 	type test struct {
 		input float64
@@ -132,6 +136,7 @@ func TestKelvinToFahrenheit(t *testing.T) {
 	}
 }
 
+// PASS
 func TestKelvinToCelsius(t *testing.T) {
 	type test struct {
 		input float64

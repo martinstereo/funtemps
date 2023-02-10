@@ -19,9 +19,9 @@ func TestGetFunFacts(t *testing.T) {
 	}
 
 	// Her må du legge inn korrekte testverdier
-	//tests := []test{
-	//  {input: , want: },
-	//}
+	tests := []test{
+	{input: , want: },
+	}
 
 	for _, tc := range tests {
 		got := GetFunFacts(tc.input)

@@ -9,11 +9,11 @@ import (
 
 // Definerer flag-variablene i hoved-"scope"
 var (
-	fahr     float64
-	kelvin   float64
-	celsius  float64
-	out      string
-	funfacts string
+	fahr    float64
+	kelvin  float64
+	celsius float64
+	out     string
+	// funfacts string
 )
 
 // Bruker init (som anbefalt i dokumentasjonen) for å sikre at flagvariablene
@@ -64,8 +64,10 @@ func main() {
 	//Fahrenheit til Celsius
 	if out == "C" && isFlagPassed("F") {
 		celsius = conv.FahrenheitToCelsius(fahr)
-		fmt.Printf("%.2f°F er %.2f°C", fahr, celsius) // printer ut verdi med 2 desimaltall
+		fmt.Printf("%.2f°F er %.2f°C", fahr, celsius) //Forsøk på å formattere float output
 	}
+	// printer ut verdi med 2 desimaltall, fungerer ikke for tall
+	// større enn 5 sifre, da blir det returnert potenser
 
 	//Fahrenheit til Kelvin
 	if out == "K" && isFlagPassed("F") {

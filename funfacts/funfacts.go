@@ -1,4 +1,4 @@
-package funfucts
+package funfacts
 
 /**
   Implementer funfacts-funksjon:
@@ -6,14 +6,19 @@ package funfucts
       hvor about kan ha en av tre testverdier, -
         sun, luna eller terra
 
-  Sett inn alle Funfucts i en struktur
-  type FunFacts struct {
-      Sun []string
-      Luna []string
-      Terra []string
-  }
 */
 
-func GetFunFacts(about string) []string {
+type FunFacts struct {
+	sun   []string
+	luna  []string
+	terra []string
+}
 
+func GetFunFacts(sun, luna, terra string) []string {
+
+	funfact := []FunFacts{
+		{sun: ["hello"], luna: "ss"},
+	}
+
+	return
 }
