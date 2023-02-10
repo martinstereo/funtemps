@@ -66,8 +66,6 @@ func main() {
 		celsius = conv.FahrenheitToCelsius(fahr)
 		fmt.Printf("%.2f°F er %.2f°C", fahr, celsius) //Forsøk på å formattere float output
 	}
-	// printer ut verdi med 2 desimaltall, fungerer ikke for tall
-	// større enn 5 sifre, da blir det returnert potenser
 
 	//Fahrenheit til Kelvin
 	if out == "K" && isFlagPassed("F") {
