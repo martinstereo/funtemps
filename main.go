@@ -34,62 +34,67 @@ func init() {
 	// hvilken temperaturskala skal brukes når funfacts skal vises
 }
 
+/*
+Program som kan tar innput i form av (kun en om gangen) temperaturene Celsius, Fahrenheit og Kalvin
+fra kommandolinje i form av flagg
+
+F.eks.
+
+"-F 100 -out C"
+
+	vil returnere 100 grader Fahrenheit til Celsius.
+
+Og returnerer temperaturen spesifisert av input i "-out X"
+*/
+
 func main() {
-	fmt.Println("Starting the application...")
-	flag.Parse()
+	fmt.Println("Starting the application...") // Test print
 
-	/**
-	    Her må logikken for flaggene og kall til funksjoner fra conv og funfacts
-	    pakkene implementere
-	    Det er anbefalt å sette opp en tabell med alle mulige kombinasjoner
-	    av flagg. flag-pakken har funksjoner som man kan bruke for å teste
-	    hvor mange flagg og argumenter er spesifisert på kommandolinje.
+	flag.Parse() // Parse has to be run after decleration of flags and before their access to the program/main
 
-	        fmt.Println("len(flag.Args())", len(flag.Args()))
-			    fmt.Println("flag.NFlag()", flag.NFlag())
-
-	    Enkelte kombinasjoner skal ikke være gyldige og da må kontrollstrukturer
-	    brukes for å utelukke ugyldige kombinasjoner:
-	    -F, -C, -K kan ikke brukes samtidig
-	    disse tre kan brukes med -out, men ikke med -funfacts
-	    -funfacts kan brukes kun med -t
-	    ...
+	/*
+	   Enkelte kombinasjoner skal ikke være gyldige og da må kontrollstrukturer
+	   brukes for å utelukke ugyldige kombinasjoner:
+	   -F, -C, -K kan ikke brukes samtidig
+	   disse tre kan brukes med -out, men ikke med -funfacts
+	   -funfacts kan brukes kun med -t
+	   ...
 	*/
 
 	//Fahrenheit til Celsius
 	if out == "C" && isFlagPassed("F") {
 		celsius = conv.FahrenheitToCelsius(fahr)
-		fmt.Println(fahr, "°F er ", celsius, "°C")
+		fmt.Printf("%.2f°F er %.2f°C", fahr, celsius) // printer ut verdi med 2 desimaltall
 	}
 
 	//Fahrenheit til Kelvin
 	if out == "K" && isFlagPassed("F") {
 		kelvin = conv.FahrenheitToKelvin(fahr)
-		fmt.Println(fahr, "°F er ", kelvin, "°K")
+		fmt.Printf("%.2f °F er %.2f °K", fahr, kelvin)
 	}
 
 	//Celsius til Fahrenheit
 	if out == "F" && isFlagPassed("C") {
 		fahr = conv.CelsiusToFahrenheit(celsius)
-		fmt.Println(celsius, "°C er ", fahr, "°F")
+		fmt.Printf("%.2f°C er %.2f°F", celsius, fahr)
 	}
 
 	//Celsius til Kelvin
 	if out == "K" && isFlagPassed("C") {
 		kelvin = conv.CelsiusToKelvin(celsius)
-		fmt.Println(celsius, "°C er ", kelvin, "°K")
+		fmt.Printf("%.2f°C er %.2f°K", celsius, kelvin)
 	}
 
 	//Kelvin til Fahrenheit
 	if out == "F" && isFlagPassed("K") {
 		fahr = conv.KelvinToFahrenheit(kelvin)
-		fmt.Println(kelvin, "°K er ", fahr, "°F")
+		fmt.Printf("%.2f°K er %.2f°F", kelvin, fahr)
 	}
 
 	//Kelvin til Celsius
 	if out == "C" && isFlagPassed("K") {
 		celsius = conv.KelvinToCelsius(kelvin)
-		fmt.Println(kelvin, "°K er ", celsius, "°C")
+		fmt.Printf("%.2f°K er %.2f°C", kelvin, celsius)
 	}
 
 }
