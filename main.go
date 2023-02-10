@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/naausicaa/funtemps/conv"
+	"github.com/naausicaa/funtemps/funfacts"
 )
 
 // Definerer flag-variablene i hoved-"scope"
@@ -13,7 +14,8 @@ var (
 	kelvin  float64
 	celsius float64
 	out     string
-	// funfacts string
+	funf    string
+	t       string
 )
 
 // Bruker init (som anbefalt i dokumentasjonen) for å sikre at flagvariablene
@@ -28,10 +30,9 @@ func init() {
 
 	flag.StringVar(&out, "out", "C", "beregne temperatur i F - farhenheit")
 
-	// flag.StringVar(&funfacts, "funfacts", "sun", "\"fun-facts\" om sun - Solen, luna - Månen og terra - Jorden")
+	flag.StringVar(&funf, "funfacts", "sun", "\"fun-facts\" om sun - Solen, luna - Månen og terra - Jorden")
+	flag.StringVar(&t, "t", "C", "bestemmer hvilken temperaturskala som skal brukes når funfacts skal vises")
 
-	// Du må selv definere flag-variabelen for -t flagget, som bestemmer
-	// hvilken temperaturskala skal brukes når funfacts skal vises
 }
 
 /*
@@ -97,6 +98,44 @@ func main() {
 		fmt.Printf("%.2f°K er %.2f°C", kelvin, celsius)
 	}
 
+	// FUNFACTS
+	// Sun facts
+	if funf == "sun" && isFlagPassed("funfacts") {
+		sunFact := funfacts.GetFunFacts(funf)
+		if t == "C" { // if user typed Celsius
+
+			fmt.Printf("%v %v %v", sunFact[0], 15000000, "°C.\n") // Skal bytte til printf
+			fmt.Println(sunFact[1], conv.KelvinToCelsius(5778), "°C.")
+		} else if t == "K" { // if user typed Kelvin
+			fmt.Println(sunFact[0], conv.CelsiusToKelvin(15000000), "°K.\n", sunFact[1], 5778, "°K.")
+		} else if t == "F" { // if user typed Fahrenheit
+			fmt.Println(sunFact[0], conv.CelsiusToFahrenheit(15000000), "°F.\n", sunFact[1], conv.KelvinToFahrenheit(5778), "°F.")
+		}
+	}
+
+	// Luna facts
+	if funf == "luna" && isFlagPassed("funfacts") {
+		lunafact := funfacts.GetFunFacts(funf)
+		if t == "C" {
+			fmt.Println(lunafact[0], -183, "°C.\n", lunafact[1], 106, "°C.")
+		} else if t == "K" {
+			fmt.Println(lunafact[0], conv.CelsiusToKelvin(-183), "°K.\n", lunafact[1], conv.CelsiusToKelvin(106), "°K.")
+		} else if t == "F" {
+			fmt.Println(lunafact[0], conv.CelsiusToFahrenheit(-183), "°F.\n", lunafact[1], conv.CelsiusToFahrenheit(106), "°F.")
+		}
+	}
+
+	//Terra facts
+	if funf == "terra" && isFlagPassed("funfacts") {
+		terrafact := funfacts.GetFunFacts(funf)
+		if t == "C" {
+			fmt.Println(terrafact[0], 56.7, "°C.\n", terrafact[1], -89.4, "°C.")
+		} else if t == "K" {
+			fmt.Println(terrafact[0], 329.82, "°K.\n", terrafact[1], conv.CelsiusToKelvin(-89.4), "°K.")
+		} else if t == "F" {
+			fmt.Println(terrafact[0], 134, "°F.\n", terrafact[1], conv.CelsiusToFahrenheit(-89.4), "°F.")
+		}
+	}
 }
 
 // Funksjonen sjekker om flagget er spesifisert på kommandolinje
