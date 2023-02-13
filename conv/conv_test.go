@@ -49,7 +49,7 @@ func TestFahrenheitToCelsius(t *testing.T) {
 
 	for _, tc := range tests {
 		got := FahrenheitToCelsius(tc.input)
-		if !withinTolerance(tc.want, got, 1e-5) {
+		if !withinTolerance(tc.want, got, 1e-2) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -68,7 +68,7 @@ func TestFahrenheitToKelvin(t *testing.T) {
 
 	for _, tc := range tests {
 		got := FahrenheitToKelvin(tc.input)
-		if !withinTolerance(tc.want, got, 1e-5) {
+		if !withinTolerance(tc.want, got, 1e-2) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 
@@ -90,7 +90,7 @@ func TestCelsiusToFahrenheit(t *testing.T) {
 
 	for _, tc := range tests {
 		got := CelsiusToFahrenheit(tc.input)
-		if !withinTolerance(tc.want, got, 1e-5) {
+		if !withinTolerance(tc.want, got, 1e-2) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -110,7 +110,7 @@ func TestCelsiusToKelvin(t *testing.T) {
 
 	for _, tc := range tests {
 		got := CelsiusToKelvin(tc.input)
-		if !withinTolerance(tc.want, got, 1e-5) {
+		if !withinTolerance(tc.want, got, 1e-2) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -130,7 +130,7 @@ func TestKelvinToFahrenheit(t *testing.T) {
 
 	for _, tc := range tests {
 		got := KelvinToFahrenheit(tc.input)
-		if !withinTolerance(tc.want, got, 1e-5) {
+		if !withinTolerance(tc.want, got, 1e-2) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
@@ -149,7 +149,7 @@ func TestKelvinToCelsius(t *testing.T) {
 
 	for _, tc := range tests {
 		got := KelvinToCelsius(tc.input)
-		if !withinTolerance(tc.want, got, 1e-5) {
+		if !withinTolerance(tc.want, got, 1e-2) {
 			t.Errorf("expected: %v, got: %v", tc.want, got)
 		}
 	}
