@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strings"
 
 	"github.com/naausicaa/funtemps/conv"     // importerer konverterings-funksjonene fra conv-mappen
 	"github.com/naausicaa/funtemps/funfacts" // importerer funfacts-funksjonen fra funfacts-mappen
@@ -26,7 +27,7 @@ func init() {
 	flag.Float64Var(&fahr, "F", 0.0, "temperatur i grader Fahrenheit")
 	flag.Float64Var(&kelvin, "K", 0.0, "temperatur i grader Kelvin")
 	flag.Float64Var(&celsius, "C", 0.0, "temperatur i grader Celsius")
-	flag.StringVar(&out, "out", "C", "beregne temperatur i F - farhenheit")
+	flag.StringVar(&out, "out", "C", "beregne temperatur i F - farhenheit, C - Celsius eller K - Kelvin")
 	flag.StringVar(&funf, "funfacts", "sun", "\"fun-facts\" om sun - Solen, luna - Månen og terra - Jorden")
 	flag.StringVar(&t, "t", "C", "bestemmer hvilken temperaturskala som skal brukes når funfacts skal vises")
 }
@@ -48,45 +49,51 @@ Kan også returnere funfacts om temperatur på solen, månen og jordkloden ved:
 func main() {
 	fmt.Println("Starting the application...") // Test print
 
-	flag.Parse() // Parse has to be run after decleration of flags and before their access to the program/main
+	flag.Parse() // Parse has to be run after decleration of flags and before their access to the program
 
-	if out == "C" && isFlagPassed("F") { //Fahrenheit til Celsius
+	if out == "C" && isFlagPassed("F") && !isFlagPassed("t") { //Fahrenheit til Celsius
 		celsius = conv.FahrenheitToCelsius(fahr)
-		fmt.Printf("%.2f°F er %.2f°C", fahr, celsius) //Forsøk på å formattere float output
+		celsiusFormatted := (FormatNumber(celsius)) // Formatted float with no trailing zeros and two decimal places
+		fmt.Printf("%f°F er %v°C\n", fahr, celsiusFormatted)
 	}
-	if out == "K" && isFlagPassed("F") { //Fahrenheit til Kelvin
+	if out == "K" && isFlagPassed("F") && !isFlagPassed("t") { //Fahrenheit til Kelvin
 		kelvin = conv.FahrenheitToKelvin(fahr)
-		fmt.Printf("%.2f °F er %.2f °K", fahr, kelvin)
+		kelvinFormatted := FormatNumber(kelvin)
+		fmt.Printf("%f°F er %v°K\n", fahr, kelvinFormatted)
 	}
-	if out == "F" && isFlagPassed("C") { //Celsius til Fahrenheit
+	if out == "F" && isFlagPassed("C") && !isFlagPassed("t") { //Celsius til Fahrenheit
 		fahr = conv.CelsiusToFahrenheit(celsius)
-		fmt.Printf("%.2f°C er %.2f°F", celsius, fahr)
+		fahrFormatted := FormatNumber(fahr)
+		fmt.Printf("%f°C er %v°F\n", celsius, fahrFormatted)
 	}
-	if out == "K" && isFlagPassed("C") { //Celsius til Kelvin
+	if out == "K" && isFlagPassed("C") && !isFlagPassed("t") { //Celsius til Kelvin
 		kelvin = conv.CelsiusToKelvin(celsius)
-		fmt.Printf("%.2f°C er %.2f°K", celsius, kelvin)
+		kelvinFormatted := FormatNumber(kelvin)
+		fmt.Printf("%f°C er %v°K\n", celsius, kelvinFormatted)
 	}
-	if out == "F" && isFlagPassed("K") { //Kelvin til Fahrenheit
+	if out == "F" && isFlagPassed("K") && !isFlagPassed("t") { //Kelvin til Fahrenheit
 		fahr = conv.KelvinToFahrenheit(kelvin)
-		fmt.Printf("%.2f°K er %.2f°F", kelvin, fahr)
+		fahrFormatted := FormatNumber(fahr)
+		fmt.Printf("%f°K er %v°F\n", kelvin, fahrFormatted)
 	}
-	if out == "C" && isFlagPassed("K") { //Kelvin til Celsius
+	if out == "C" && isFlagPassed("K") && !isFlagPassed("t") { //Kelvin til Celsius
 		celsius = conv.KelvinToCelsius(kelvin)
-		fmt.Printf("%.2f°K er %.2f°C", kelvin, celsius)
+		celsiusFormatted := FormatNumber(celsius)
+		fmt.Printf("%f°K er %v°C\n", kelvin, celsiusFormatted)
 	}
 
-	// FUNFACTS -- Sun facts
-	if funf == "sun" && isFlagPassed("funfacts") {
+	// Funfacts - Sun
+	if funf == "sun" && isFlagPassed("funfacts") && isFlagPassed("t") {
 		sunFact := funfacts.GetFunFacts(funf)
 		if t == "C" { // if user typed Celsius
-			fmt.Printf("%v %v %v", sunFact[0], 15000000, "°C.\n") // Skal bytte til printf
-			fmt.Printf("%v %.2f %v", sunFact[1], conv.KelvinToCelsius(5778), "°C.")
+			fmt.Printf("%v %v°C.\n", sunFact[0], FormatNumber(15000000)) // Skal bytte til printf
+			fmt.Printf("%v %v°C.\n", sunFact[1], FormatNumber(conv.KelvinToCelsius(5778.00)))
 		} else if t == "K" { // if user typed Kelvin
-			fmt.Printf("%v %.2f %v", sunFact[0], conv.CelsiusToKelvin(15000000), "°K.\n")
-			fmt.Printf("%v %v %v", sunFact[1], 5778, "°K.")
+			fmt.Printf("%v %v°K.\n", sunFact[0], FormatNumber(conv.CelsiusToKelvin(15000000)))
+			fmt.Printf("%v %v°K.\n", sunFact[1], FormatNumber(5778))
 		} else if t == "F" { // if user typed Fahrenheit
-			fmt.Printf("%v %.2f %v", sunFact[0], conv.CelsiusToFahrenheit(15000000), "°F.\n")
-			fmt.Printf("%v %.2f %v", sunFact[1], conv.KelvinToFahrenheit(5778), "°F.")
+			fmt.Printf("%v %v°F.\n", sunFact[0], FormatNumber(conv.CelsiusToFahrenheit(15000000)))
+			fmt.Printf("%v %v°F.\n", sunFact[1], FormatNumber(conv.KelvinToFahrenheit(5778)))
 		}
 	}
 
@@ -94,14 +101,14 @@ func main() {
 	if funf == "luna" && isFlagPassed("funfacts") {
 		lunafact := funfacts.GetFunFacts(funf)
 		if t == "C" {
-			fmt.Printf("%v %v %v", lunafact[0], -183, "°C.\n")
-			fmt.Printf("%v %v %v", lunafact[1], 106, "°C.")
+			fmt.Printf("%v %v°C.\n", lunafact[0], -183)
+			fmt.Printf("%v %v°C.\n", lunafact[1], 106)
 		} else if t == "K" {
-			fmt.Printf("%v %.2f %v", lunafact[0], conv.CelsiusToKelvin(-183), "°K.\n")
-			fmt.Printf("%v %.2f %v", lunafact[1], conv.CelsiusToKelvin(106), "°K.")
+			fmt.Printf("%v %v°K.\n", lunafact[0], FormatNumber(conv.CelsiusToKelvin(-183)))
+			fmt.Printf("%v %v°K.\n", lunafact[1], FormatNumber(conv.CelsiusToKelvin(106)))
 		} else if t == "F" {
-			fmt.Printf("%v %.2f %v", lunafact[0], conv.CelsiusToFahrenheit(-183), "°F.\n")
-			fmt.Printf("%v %.2f %v", lunafact[1], conv.CelsiusToFahrenheit(106), "°F.")
+			fmt.Printf("%v %v°F.\n", lunafact[0], FormatNumber(conv.CelsiusToFahrenheit(-183)))
+			fmt.Printf("%v %v°F.\n", lunafact[1], FormatNumber(conv.CelsiusToFahrenheit(106)))
 		}
 	}
 
@@ -109,15 +116,18 @@ func main() {
 	if funf == "terra" && isFlagPassed("funfacts") {
 		terrafact := funfacts.GetFunFacts(funf)
 		if t == "C" {
-			fmt.Printf("%v %v %v", terrafact[0], 56.7, "°C.\n")
-			fmt.Printf("%v %v %v", terrafact[1], -89.4, "°C.")
+			fmt.Printf("%v %v°C.\n", terrafact[0], 56.7)
+			fmt.Printf("%v %v°C.\n", terrafact[1], -89.4)
 		} else if t == "K" {
-			fmt.Printf("%v %v %v", terrafact[0], 329.82, "°K.\n")
-			fmt.Printf("%v %.2f %v", terrafact[1], conv.CelsiusToKelvin(-89.4), "°K.")
+			fmt.Printf("%v %v°K.\n", terrafact[0], 329.82)
+			fmt.Printf("%v %v°K.\n", terrafact[1], FormatNumber(conv.CelsiusToKelvin(-89.4)))
 		} else if t == "F" {
-			fmt.Printf("%v %v %v", terrafact[0], 134, "°F.\n")
-			fmt.Printf("%v %.2f %v", terrafact[1], conv.CelsiusToFahrenheit(-89.4), "°F.")
+			fmt.Printf("%v %v°F.\n", terrafact[0], 134)
+			fmt.Printf("%v %v°F.\n", terrafact[1], FormatNumber(conv.CelsiusToFahrenheit(-89.4)))
 		}
+	}
+	if flag.NFlag() == 0 { // error if no flags were provided
+		fmt.Println("No flags were provided... Try -help", flag.NFlag())
 	}
 }
 
@@ -130,4 +140,32 @@ func isFlagPassed(name string) bool {
 		}
 	})
 	return found
+}
+
+// Function that format floats to no trailing zeros and two decimals.
+// Also adding spaces between big numbers, works for integers as well.
+// From Chat GPT
+func FormatNumber(num float64) string {
+	str := fmt.Sprintf("%.2f", num)
+	str = strings.TrimRight(str, "0")
+	str = strings.TrimRight(str, ".")
+
+	parts := strings.Split(str, ".")
+	integerPart := parts[0]
+	var decimalPart string
+	if len(parts) > 1 {
+		decimalPart = parts[1]
+	}
+	var formattedIntegerPart string
+	n := len(integerPart)
+	for i, v := range integerPart {
+		formattedIntegerPart += string(v)
+		if (n-i-1)%3 == 0 && i != n-1 {
+			formattedIntegerPart += " "
+		}
+	}
+	if decimalPart != "" {
+		return formattedIntegerPart + "." + decimalPart
+	}
+	return formattedIntegerPart
 }
