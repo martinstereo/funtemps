@@ -82,7 +82,7 @@ func main() {
 	}
 
 	// Funfacts - Sun
-	if funf == "sun" && isFlagPassed("funfacts") && isFlagPassed("t") {
+	if funf == "sun" && isFlagPassed("funfacts") && isFlagPassed("t") && !isFlagPassed("out") {
 		sunFact := funfacts.GetFunFacts(funf)
 		if t == "C" { // if user typed Celsius
 			fmt.Printf("%v %v°C.\n", sunFact[0], FormatNumber(15000000))
@@ -97,7 +97,7 @@ func main() {
 	}
 
 	// Luna facts
-	if funf == "luna" && isFlagPassed("funfacts") {
+	if funf == "luna" && isFlagPassed("funfacts") && isFlagPassed("t") && !isFlagPassed("out") {
 		lunafact := funfacts.GetFunFacts(funf)
 		if t == "C" {
 			fmt.Printf("%v %v°C.\n", lunafact[0], -183)
@@ -112,7 +112,7 @@ func main() {
 	}
 
 	//Terra facts
-	if funf == "terra" && isFlagPassed("funfacts") {
+	if funf == "terra" && isFlagPassed("funfacts") && isFlagPassed("t") && !isFlagPassed("out") {
 		terrafact := funfacts.GetFunFacts(funf)
 		if t == "C" {
 			fmt.Printf("%v %v°C.\n", terrafact[0], 56.7)
