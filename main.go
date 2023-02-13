@@ -47,7 +47,6 @@ Kan også returnere funfacts om temperatur på solen, månen og jordkloden ved:
 	Vil returnere funfacts om sola i celsius, fungerer også for Kelvin og Fahrenheit
 */
 func main() {
-	fmt.Println("Starting the application...") // Test print
 
 	flag.Parse() // Parse has to be run after decleration of flags and before their access to the program
 
@@ -86,7 +85,7 @@ func main() {
 	if funf == "sun" && isFlagPassed("funfacts") && isFlagPassed("t") {
 		sunFact := funfacts.GetFunFacts(funf)
 		if t == "C" { // if user typed Celsius
-			fmt.Printf("%v %v°C.\n", sunFact[0], FormatNumber(15000000)) // Skal bytte til printf
+			fmt.Printf("%v %v°C.\n", sunFact[0], FormatNumber(15000000))
 			fmt.Printf("%v %v°C.\n", sunFact[1], FormatNumber(conv.KelvinToCelsius(5778.00)))
 		} else if t == "K" { // if user typed Kelvin
 			fmt.Printf("%v %v°K.\n", sunFact[0], FormatNumber(conv.CelsiusToKelvin(15000000)))
@@ -142,7 +141,7 @@ func isFlagPassed(name string) bool {
 	return found
 }
 
-// Function that format floats to no trailing zeros and two decimals.
+// Function that format numbers to no trailing zeros and two decimals.
 // Also adding spaces between big numbers, works for integers as well.
 // From Chat GPT
 func FormatNumber(num float64) string {
