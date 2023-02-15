@@ -153,11 +153,8 @@ func FormatNumber(num float64) string {
 	str = strings.TrimRight(str, "0")
 	parts := strings.Split(str, ".")
 	integerPart := parts[0]
-	var decimalPart string
+	decimalPart := parts[1]
 
-	if len(parts) > 1 {
-		decimalPart = parts[1]
-	}
 	var formattedIntegerPart string
 	n := len(integerPart)
 	for i, v := range integerPart {
