@@ -125,8 +125,12 @@ func main() {
 			fmt.Printf("%v %v°F.\n", terrafact[1], FormatNumber(conv.CelsiusToFahrenheit(-89.4)))
 		}
 	}
+
+	// Error message if less than 2 flags were provided
 	if flag.NFlag() == 0 { // error if no flags were provided
-		fmt.Println("No flags were provided... Try -help", flag.NFlag())
+		fmt.Println("No flags were provided... Try -help ...", flag.NFlag())
+	} else if flag.NFlag() == 1 {
+		fmt.Println("Only one flag was provided... Program ran with default values ...", flag.NFlag())
 	}
 }
 
@@ -147,11 +151,10 @@ func isFlagPassed(name string) bool {
 func FormatNumber(num float64) string {
 	str := fmt.Sprintf("%.2f", num)
 	str = strings.TrimRight(str, "0")
-	str = strings.TrimRight(str, ".")
-
 	parts := strings.Split(str, ".")
 	integerPart := parts[0]
 	var decimalPart string
+
 	if len(parts) > 1 {
 		decimalPart = parts[1]
 	}
