@@ -140,10 +140,6 @@ func main() {
 	}
 }
 
-func FormatNumber(fahr float64) {
-	panic("unimplemented")
-}
-
 // Funksjonen sjekker om flagget er spesifisert på kommandolinje
 func isFlagPassed(name string) bool {
 	found := false
