@@ -60,7 +60,7 @@ func main() {
 		kelvin = conv.FahrenheitToKelvin(fahr)
 		kelvinFormatted := format.FormatOutput(kelvin)
 		fahrFormatted := format.FormatInput(fahr)
-		fmt.Printf("%v°F er %v°K\n", fahrFormatted, kelvinFormatted)
+		fmt.Printf("%v°F er %vK\n", fahrFormatted, kelvinFormatted)
 	}
 	if out == "F" && isFlagPassed("C") && !isFlagPassed("t") { //Celsius til Fahrenheit
 		fahr = conv.CelsiusToFahrenheit(celsius)
@@ -72,19 +72,19 @@ func main() {
 		kelvin = conv.CelsiusToKelvin(celsius)
 		kelvinFormatted := format.FormatOutput(kelvin)
 		celsiusFormatted := format.FormatInput(celsius)
-		fmt.Printf("%v°C er %v°K\n", celsiusFormatted, kelvinFormatted)
+		fmt.Printf("%v°C er %vK\n", celsiusFormatted, kelvinFormatted)
 	}
 	if out == "F" && isFlagPassed("K") && !isFlagPassed("t") { //Kelvin til Fahrenheit
 		fahr = conv.KelvinToFahrenheit(kelvin)
 		fahrFormatted := format.FormatOutput(fahr)
 		kelvinFormatted := format.FormatInput(kelvin)
-		fmt.Printf("%v°K er %v°F\n", kelvinFormatted, fahrFormatted)
+		fmt.Printf("%vK er %v°F\n", kelvinFormatted, fahrFormatted)
 	}
 	if out == "C" && isFlagPassed("K") && !isFlagPassed("t") { //Kelvin til Celsius
 		celsius = conv.KelvinToCelsius(kelvin)
 		celsiusFormatted := format.FormatOutput(celsius)
 		kelvinFormatted := format.FormatInput(kelvin)
-		fmt.Printf("%v°K er %v°C\n", kelvinFormatted, celsiusFormatted)
+		fmt.Printf("%vK er %v°C\n", kelvinFormatted, celsiusFormatted)
 	}
 
 	// Funfacts - Sun
@@ -94,8 +94,8 @@ func main() {
 			fmt.Printf("%v %v°C.\n", sunFact[0], format.FormatOutput(15000000))
 			fmt.Printf("%v %v°C.\n", sunFact[1], format.FormatOutput(conv.KelvinToCelsius(5778.00)))
 		} else if t == "K" { // if user typed Kelvin
-			fmt.Printf("%v %v°K.\n", sunFact[0], format.FormatOutput(conv.CelsiusToKelvin(15000000)))
-			fmt.Printf("%v %v°K.\n", sunFact[1], format.FormatOutput(5778))
+			fmt.Printf("%v %vK.\n", sunFact[0], format.FormatOutput(conv.CelsiusToKelvin(15000000)))
+			fmt.Printf("%v %vK.\n", sunFact[1], format.FormatOutput(5778))
 		} else if t == "F" { // if user typed Fahrenheit
 			fmt.Printf("%v %v°F.\n", sunFact[0], format.FormatOutput(conv.CelsiusToFahrenheit(15000000)))
 			fmt.Printf("%v %v°F.\n", sunFact[1], format.FormatOutput(conv.KelvinToFahrenheit(5778)))
@@ -109,8 +109,8 @@ func main() {
 			fmt.Printf("%v %v°C.\n", lunafact[0], -183)
 			fmt.Printf("%v %v°C.\n", lunafact[1], 106)
 		} else if t == "K" {
-			fmt.Printf("%v %v°K.\n", lunafact[0], format.FormatOutput(conv.CelsiusToKelvin(-183)))
-			fmt.Printf("%v %v°K.\n", lunafact[1], format.FormatOutput(conv.CelsiusToKelvin(106)))
+			fmt.Printf("%v %vK.\n", lunafact[0], format.FormatOutput(conv.CelsiusToKelvin(-183)))
+			fmt.Printf("%v %vK.\n", lunafact[1], format.FormatOutput(conv.CelsiusToKelvin(106)))
 		} else if t == "F" {
 			fmt.Printf("%v %v°F.\n", lunafact[0], format.FormatOutput(conv.CelsiusToFahrenheit(-183)))
 			fmt.Printf("%v %v°F.\n", lunafact[1], format.FormatOutput(conv.CelsiusToFahrenheit(106)))
@@ -124,8 +124,8 @@ func main() {
 			fmt.Printf("%v %v°C.\n", terrafact[0], 56.7)
 			fmt.Printf("%v %v°C.\n", terrafact[1], -89.4)
 		} else if t == "K" {
-			fmt.Printf("%v %v°K.\n", terrafact[0], 329.82)
-			fmt.Printf("%v %v°K.\n", terrafact[1], format.FormatOutput(conv.CelsiusToKelvin(-89.4)))
+			fmt.Printf("%v %vK.\n", terrafact[0], 329.82)
+			fmt.Printf("%v %vK.\n", terrafact[1], format.FormatOutput(conv.CelsiusToKelvin(-89.4)))
 		} else if t == "F" {
 			fmt.Printf("%v %v°F.\n", terrafact[0], 134)
 			fmt.Printf("%v %v°F.\n", terrafact[1], format.FormatOutput(conv.CelsiusToFahrenheit(-89.4)))
