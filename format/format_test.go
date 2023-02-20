@@ -25,6 +25,7 @@ func TestFormatInput(t *testing.T) {
 
 	tests := []test{
 		{input: 5000.00300, want: "5 000.003"},
+		{input: 5000.00, want: "5 000"},
 	}
 
 	for _, tc := range tests {
@@ -44,6 +45,8 @@ func TestFormatOutput(t *testing.T) {
 
 	tests := []test{
 		{input: 5000.00300, want: "5 000"},
+		{input: 5000.40300, want: "5 000.4"},
+		{input: 5000.4111111, want: "5 000.41"},
 	}
 
 	for _, tc := range tests {
