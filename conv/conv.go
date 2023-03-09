@@ -14,36 +14,30 @@ package conv
 
 // Celsius = (Farhrenheit - 32)*5/9
 func FahrenheitToCelsius(fahr float64) float64 {
-	celsius := (fahr - 32) * 5 / 9
-	return celsius
+	return (fahr - 32) * 5 / 9
 }
 
 // Kelvin = (Farhenheit - 32) * (5/9) + 273.15
 func FahrenheitToKelvin(fahr float64) float64 {
-	kelvin := (fahr-32)*5/9 + 273.15
-	return kelvin
+	return (fahr-32)*5/9 + 273.15
 }
 
 // Fahrenheit = Celsius*(9/5) + 32
 func CelsiusToFahrenheit(celsius float64) float64 {
-	fahr := celsius*9/5 + 32
-	return fahr
+	return celsius*9/5 + 32
 }
 
 // Kelvin = Celsius + 273.15
 func CelsiusToKelvin(celsius float64) float64 {
-	kelvin := celsius + 273.15
-	return kelvin
+	return celsius + 273.15
 }
 
 // Farhrenheit = (Kelvin - 273.15)*(9/5) + 32
 func KelvinToFahrenheit(kelvin float64) float64 {
-	fahr := (kelvin-273.15)*9/5 + 32
-	return fahr
+	return (kelvin-273.15)*9/5 + 32
 }
 
 // Celsius = Kelvin - 273.15
 func KelvinToCelsius(kelvin float64) float64 {
-	celsius := kelvin - 273.15
-	return celsius
+	return kelvin - 273.15
 }
